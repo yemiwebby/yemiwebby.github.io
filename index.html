@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.13/vue.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.17.1/axios.js"></script>
+    <title>Vue Js</title>
+</head>
+<body>
+    <div id="app">
+        <div class="jumbotron text-center">
+            <p>For more jokes. Click the button below</p>
+            <button class="btn btn-default" v-on:click="fetchData">Fetch Datas</button>
+        </div>
+        
+        <div class="container">
+            <div class="row">
+                <div v-for="joke in comics" :key="joke.id">
+                    <p>{{joke.joke}}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    
+    
+    <script>
+        new Vue({
+            el: '#app',
+            data() {
+                return {
+                    comics: [],
+                }
+            },
+            created() {
+                console.log("It works");
+            },
+            methods: {
+                fetchData() {
+                    axios.get("http://api.icndb.com/jokes/random/5").then((res) => {
+                        console.log(res);
+                        this.comics = res.data.value;
+                    }, (err) => {
+                        console.log(err);
+                    });
+                }
+            }
+        })
+    </script>
+</body>
+</html>

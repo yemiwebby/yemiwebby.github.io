@@ -40,7 +40,7 @@
             },
             methods: {
                 fetchData() {
-                    axios.get("http://api.icndb.com/jokes/random/5").then((res) => {
+                    axios.get("https://api.icndb.com/jokes/random/5").then((res) => {
                         console.log(res);
                         this.comics = res.data.value;
                     }, (err) => {
